@@ -17,7 +17,8 @@
  *
  * Leave as an empty string to run the form in demo mode (no network call).
  */
-export const GOOGLE_APPS_SCRIPT_URL = "";
+export const GOOGLE_APPS_SCRIPT_URL =
+  "https://script.google.com/macros/s/AKfycbyvWo9Ik1li7IGc8_WRasTvPH5bvYjOVuGro4K41BaP35a9QjmvpLuO_UOhlGhTo-ZPUw/exec";
 
 /** Where lead notification emails are sent (also shown as mailto: on the site). */
 export const CONTACT_EMAIL = "HerDigitalPath@gmail.com";
