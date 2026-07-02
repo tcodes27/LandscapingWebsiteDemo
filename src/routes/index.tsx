@@ -67,6 +67,7 @@ function Index() {
       <Block8Close />
       <DemoBadge />
       <FloatingCTA />
+      <BackToTop />
       <Toaster position="top-center" richColors />
     </main>
   );
