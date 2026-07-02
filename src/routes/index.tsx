@@ -4,6 +4,7 @@ import { SiteNav } from "@/components/site/nav";
 import { AvailabilityBanner } from "@/components/site/availability-banner";
 import { DemoBadge } from "@/components/site/demo-badge";
 import { FloatingCTA } from "@/components/site/floating-cta";
+import { BackToTop } from "@/components/site/back-to-top";
 import { Block1Hero } from "@/components/site/block-1-hero";
 import { Block2Services } from "@/components/site/block-2-services";
 import { Block3Results } from "@/components/site/block-3-results";
