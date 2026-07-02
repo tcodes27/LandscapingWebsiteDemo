@@ -5,23 +5,44 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { toast } from "sonner";
-import { Mail, Globe, ArrowRight } from "lucide-react";
+import { Mail, Globe, ArrowRight, User, MousePointerClick, FileSpreadsheet, Bell, Inbox } from "lucide-react";
 import { Section, Reveal } from "./section";
 import { brand, contact, faq, finalCta, footer } from "@/data/site";
+import { submitContact } from "@/lib/contact";
+import type { ContactSubmission } from "@/types/contact";
 
 export const FAQ_ITEMS = faq.items;
 
 export function Block8Close() {
   const [submitting, setSubmitting] = useState(false);
+  const [submitted, setSubmitted] = useState(false);
 
-  const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    const form = e.currentTarget;
+    const fd = new FormData(form);
+    const data: ContactSubmission = {
+      name: String(fd.get("name") ?? "").trim(),
+      business: String(fd.get("business") ?? "").trim(),
+      email: String(fd.get("email") ?? "").trim(),
+      phone: String(fd.get("phone") ?? "").trim(),
+      businessType: String(fd.get("businessType") ?? "").trim(),
+      services: String(fd.get("services") ?? "").trim(),
+      timeline: String(fd.get("timeline") ?? "").trim(),
+      message: String(fd.get("message") ?? "").trim(),
+    };
     setSubmitting(true);
-    setTimeout(() => {
-      setSubmitting(false);
-      (e.target as HTMLFormElement).reset();
+    const result = await submitContact(data);
+    setSubmitting(false);
+    if (result.ok) {
+      form.reset();
+      setSubmitted(true);
       toast.success(contact.successTitle, { description: contact.successBody });
-    }, 700);
+    } else {
+      toast.error("Something went wrong", {
+        description: result.error ?? "Please try again or email us directly.",
+      });
+    }
   };
 
   return (
