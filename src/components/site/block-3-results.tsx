@@ -1,17 +1,10 @@
 import { useState } from "react";
-import { Phone, ClipboardList, MousePointerClick, Star, TrendingUp, Monitor, Smartphone } from "lucide-react";
+import { TrendingUp, Monitor, Smartphone } from "lucide-react";
 import { Section, Reveal } from "./section";
 import { Counter } from "./counter";
 import { PhotoPlaceholder } from "./photo-placeholder";
 import { cn } from "@/lib/utils";
-
-const METRICS = [
-  { icon: Phone, label: "Calls this month", to: 48, sparkline: [4, 6, 5, 8, 7, 10, 12, 14, 13, 16, 18, 20] },
-  { icon: ClipboardList, label: "Estimate requests", to: 27, sparkline: [2, 3, 3, 5, 4, 6, 7, 6, 8, 9, 10, 12] },
-  { icon: MousePointerClick, label: "Website visitors", to: 1246, sparkline: [40, 60, 55, 75, 80, 92, 110, 130, 155, 180, 210, 240] },
-  { icon: Star, label: "Google rating", to: 4.9, decimals: 1, sparkline: [4.6, 4.6, 4.7, 4.7, 4.8, 4.8, 4.8, 4.9, 4.9, 4.9, 4.9, 4.9], suffix: "★" },
-  { icon: TrendingUp, label: "Search visibility", to: 62, prefix: "+", suffix: "%", sparkline: [5, 10, 14, 18, 24, 30, 34, 40, 46, 52, 58, 62] },
-];
+import { results } from "@/data/site";
 
 function Sparkline({ values, positive = true }: { values: number[]; positive?: boolean }) {
   const max = Math.max(...values);
@@ -43,9 +36,9 @@ export function Block3Results() {
   return (
     <Section
       id="results"
-      eyebrow="Real Results"
-      title={<>What a great website actually does for your business.</>}
-      lead="More phone calls. More estimate requests. Better Google ranking. Everything visible in one place."
+      eyebrow={results.eyebrow}
+      title={<>{results.title}</>}
+      lead={results.lead}
     >
       <div className="grid gap-10 lg:grid-cols-[1.15fr_1fr] lg:gap-14">
         {/* Results dashboard */}
@@ -54,18 +47,18 @@ export function Block3Results() {
             <div className="mb-5 flex items-center justify-between">
               <div>
                 <div className="text-xs font-semibold uppercase tracking-widest text-primary">
-                  Business Dashboard
+                  {results.dashboardLabel}
                 </div>
-                <div className="mt-1 text-sm text-muted-foreground">Last 30 days</div>
+                <div className="mt-1 text-sm text-muted-foreground">{results.timeframe}</div>
               </div>
               <div className="flex items-center gap-2 rounded-full bg-[var(--grass)]/15 px-3 py-1 text-xs font-semibold text-[var(--forest)]">
                 <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-[var(--grass)]" />
-                Live sample data
+                {results.liveLabel}
               </div>
             </div>
 
             <div className="grid gap-3 sm:grid-cols-2">
-              {METRICS.slice(0, 4).map((m) => (
+              {results.metrics.map((m) => (
                 <div key={m.label} className="rounded-2xl border border-border/70 bg-background p-4">
                   <div className="flex items-center gap-2 text-xs font-medium text-muted-foreground">
                     <m.icon className="h-3.5 w-3.5" />
@@ -80,24 +73,25 @@ export function Block3Results() {
               <div className="rounded-2xl border border-border/70 bg-gradient-to-br from-[var(--forest)] to-[var(--forest-deep)] p-4 text-primary-foreground sm:col-span-2">
                 <div className="flex items-center gap-2 text-xs font-medium opacity-80">
                   <TrendingUp className="h-3.5 w-3.5" />
-                  Search visibility
+                  {results.visibility.label}
                 </div>
                 <div className="mt-2 flex items-end justify-between gap-4">
                   <div className="font-display text-4xl font-bold tracking-tight">
-                    <Counter to={62} prefix="+" suffix="%" />
+                    <Counter to={results.visibility.to} prefix={results.visibility.prefix} suffix={results.visibility.suffix} />
                   </div>
-                  <p className="max-w-[16rem] text-xs opacity-80">
-                    Ranking higher on Google for local searches month over month.
-                  </p>
+                  <p className="max-w-[16rem] text-xs opacity-80">{results.visibility.copy}</p>
                 </div>
                 <div className="mt-3 h-2 w-full overflow-hidden rounded-full bg-white/15">
-                  <div className="h-full w-[72%] rounded-full bg-[var(--gold)]" />
+                  <div
+                    className="h-full rounded-full bg-[var(--gold)]"
+                    style={{ width: `${results.visibility.barPercent}%` }}
+                  />
                 </div>
               </div>
             </div>
 
             <p className="mt-4 text-[11px] uppercase tracking-widest text-muted-foreground">
-              Demo data for illustration only · Your business metrics will vary
+              {results.disclaimer}
             </p>
           </div>
         </Reveal>
@@ -106,12 +100,9 @@ export function Block3Results() {
         <Reveal delay={100}>
           <div className="flex h-full flex-col">
             <h3 className="font-display text-2xl font-bold tracking-tight sm:text-3xl text-balance">
-              Your website will look great on every device.
+              {results.device.title}
             </h3>
-            <p className="mt-3 text-muted-foreground">
-              Over half of local service searches happen on a phone. Your site is designed to look
-              polished on any screen — from a truck cab to a desktop.
-            </p>
+            <p className="mt-3 text-muted-foreground">{results.device.copy}</p>
 
             <div className="mt-6 inline-flex w-fit rounded-full border border-border bg-card p-1">
               {(["desktop", "mobile"] as const).map((d) => (

@@ -1,32 +1,6 @@
-import { Search, Map, Compass, Chrome, Globe, Mic, ArrowRight, Check, X, User, Phone, ClipboardList, HandCoins } from "lucide-react";
-import { Section, Reveal } from "./section";
-
-const CHANNELS = [
-  { icon: Search, label: "Google" },
-  { icon: Map, label: "Google Maps" },
-  { icon: Compass, label: "Safari" },
-  { icon: Chrome, label: "Chrome" },
-  { icon: Globe, label: "Bing" },
-  { icon: Mic, label: "Voice Search" },
-];
-
-const FLOW = [
-  { icon: User, label: "Customer" },
-  { icon: Search, label: "Google search" },
-  { icon: Globe, label: "Your website" },
-  { icon: Phone, label: "Phone call" },
-  { icon: ClipboardList, label: "Estimate" },
-  { icon: HandCoins, label: "New customer" },
-];
-
-const MISTAKES = [
-  "Only using Facebook",
-  "A Yahoo or Gmail address",
-  "Having no website",
-  "Slow-loading pages",
-  "No Google Business Profile",
-  "No clear call-to-action",
-];
+import { ArrowRight, Check, X } from "lucide-react";
+import { Reveal } from "./section";
+import { online } from "@/data/site";
 
 export function Block5Online() {
   return (
@@ -43,20 +17,17 @@ export function Block5Online() {
         <Reveal className="max-w-3xl">
           <div className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/5 px-3 py-1 text-xs font-semibold uppercase tracking-[0.14em] text-[var(--gold-soft)]">
             <span className="h-1.5 w-1.5 rounded-full bg-[var(--gold)]" />
-            Why online presence matters
+            {online.eyebrow}
           </div>
           <h2 className="mt-4 font-display text-3xl font-bold leading-[1.1] tracking-tight sm:text-4xl md:text-5xl text-balance">
-            Your customers don't just use Facebook.
+            {online.title}
           </h2>
-          <p className="mt-5 text-lg leading-relaxed text-white/75 text-balance">
-            They search on Google, tap into Maps, ask Siri, and open Chrome. If they can't find
-            your business anywhere but Facebook, they'll hire someone they can.
-          </p>
+          <p className="mt-5 text-lg leading-relaxed text-white/75 text-balance">{online.subhead}</p>
         </Reveal>
 
         {/* Channels */}
         <Reveal className="mt-10 grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-6">
-          {CHANNELS.map((c) => (
+          {online.channels.map((c) => (
             <div
               key={c.label}
               className="flex items-center gap-2.5 rounded-2xl border border-white/10 bg-white/5 p-3 backdrop-blur-sm"
@@ -72,10 +43,10 @@ export function Block5Online() {
         {/* SEO flow */}
         <Reveal className="mt-16">
           <div className="mb-5 text-xs font-semibold uppercase tracking-widest text-[var(--gold-soft)]">
-            How a customer actually finds you
+            {online.flowTitle}
           </div>
           <div className="flex flex-col gap-3 md:flex-row md:items-stretch">
-            {FLOW.map((step, i) => (
+            {online.flow.map((step, i) => (
               <div key={step.label} className="flex items-center gap-3 md:contents">
                 <div className="flex flex-1 items-center gap-3 rounded-2xl border border-white/10 bg-white/5 p-4 md:flex-col md:items-center md:text-center">
                   <span className="grid h-11 w-11 shrink-0 place-items-center rounded-xl bg-white/10 text-[var(--gold-soft)]">
@@ -83,7 +54,7 @@ export function Block5Online() {
                   </span>
                   <div className="text-sm font-semibold">{step.label}</div>
                 </div>
-                {i < FLOW.length - 1 && (
+                {i < online.flow.length - 1 && (
                   <ArrowRight className="h-5 w-5 shrink-0 rotate-90 text-white/40 md:rotate-0 md:self-center" />
                 )}
               </div>
@@ -96,10 +67,10 @@ export function Block5Online() {
           <Reveal>
             <div className="rounded-2xl border border-white/10 bg-white/5 p-6 sm:p-8">
               <div className="text-xs font-semibold uppercase tracking-widest text-[var(--gold-soft)]">
-                Avoid these common mistakes
+                {online.mistakesTitle}
               </div>
               <div className="mt-4 grid gap-2.5 sm:grid-cols-2">
-                {MISTAKES.map((m) => (
+                {online.mistakes.map((m) => (
                   <div key={m} className="flex items-center gap-2.5 text-sm">
                     <span className="grid h-6 w-6 shrink-0 place-items-center rounded-full bg-red-500/15 text-red-300">
                       <X className="h-3.5 w-3.5" />
@@ -113,7 +84,7 @@ export function Block5Online() {
                   <Check className="h-4 w-4" />
                 </span>
                 <p className="text-sm font-medium text-white">
-                  We'll help you fix every one of these.
+                  {online.mistakesReassure}
                 </p>
               </div>
             </div>
@@ -122,19 +93,17 @@ export function Block5Online() {
             <div className="flex h-full flex-col justify-between rounded-2xl border border-white/10 bg-white/5 p-6 sm:p-8">
               <div>
                 <div className="text-xs font-semibold uppercase tracking-widest text-[var(--gold-soft)]">
-                  A professional email builds trust
+                  {online.emailTitle}
                 </div>
-                <p className="mt-3 text-sm text-white/75">
-                  Same inbox. Different first impression.
-                </p>
+                <p className="mt-3 text-sm text-white/75">{online.emailCopy}</p>
               </div>
               <div className="mt-6 space-y-3">
                 <div className="flex items-center justify-between rounded-xl border border-red-400/30 bg-red-500/10 px-4 py-3 text-sm">
-                  <span className="line-through opacity-70">johnlandscape@yahoo.com</span>
+                  <span className="line-through opacity-70">{online.emailBad}</span>
                   <X className="h-4 w-4 text-red-300" />
                 </div>
                 <div className="flex items-center justify-between rounded-xl border border-[var(--grass)]/40 bg-[var(--grass)]/20 px-4 py-3 text-sm font-semibold">
-                  <span>john@yourbusiness.com</span>
+                  <span>{online.emailGood}</span>
                   <Check className="h-4 w-4 text-[var(--gold-soft)]" />
                 </div>
               </div>
