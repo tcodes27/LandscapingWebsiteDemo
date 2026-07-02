@@ -5,8 +5,6 @@ import { Sheet, SheetContent, SheetTrigger, SheetTitle } from "@/components/ui/s
 import { cn } from "@/lib/utils";
 import { brand, nav as LINKS, hero } from "@/data/site";
 
-const LogoIcon = brand.logoIcon;
-
 export function SiteNav() {
   const [scrolled, setScrolled] = useState(false);
   const [active, setActive] = useState("");
@@ -46,8 +44,8 @@ export function SiteNav() {
     >
       <div className="mx-auto flex h-16 w-full max-w-6xl items-center justify-between gap-4 px-5 sm:px-8">
         <a href="#top" className="flex min-w-0 items-center gap-2">
-          <span className="grid h-9 w-9 shrink-0 place-items-center rounded-xl bg-primary text-primary-foreground shadow-sm">
-            <LogoIcon className="h-4 w-4" />
+          <span className="grid h-10 w-10 shrink-0 place-items-center overflow-hidden rounded-xl bg-white shadow-sm ring-1 ring-border">
+            <img src={brand.logoImage} alt={`${brand.name} logo`} className="h-9 w-9 object-contain" />
           </span>
           <span className="truncate font-display text-base font-bold tracking-tight">
             {brand.name}

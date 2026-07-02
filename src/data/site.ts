@@ -13,6 +13,7 @@
  * ============================================================================
  */
 import type { ComponentType } from "react";
+import hdmLogo from "@/assets/hdm-logo.png.asset.json";
 import {
   ArrowRight,
   BadgeCheck,
@@ -85,6 +86,7 @@ export type Review = { name: string; role: string; quote: string; stars: number 
 export const brand = {
   name: "Her Digital Media",
   logoIcon: Leaf as Icon,
+  logoImage: hdmLogo.url,
   tagline:
     "Helping local businesses build their digital presence with fast, professional websites.",
   email: "HerDigitalPath@gmail.com",
