@@ -13,6 +13,7 @@
  * ============================================================================
  */
 import type { ComponentType } from "react";
+import hdmLogo from "@/assets/hdm-logo.png.asset.json";
 import {
   ArrowRight,
   BadgeCheck,
