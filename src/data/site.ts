@@ -472,14 +472,33 @@ export const contact = {
   copy: "Tell us about your business. We'll reply within one business day.",
   submitLabel: "Request My Demo Website",
   submittingLabel: "Sending…",
-  successTitle: "Request received",
+  successTitle: "Thank you! We've received your inquiry.",
   successBody:
-    "This is a demo form. In your live site, we'd email you back within a day.",
+    "We'll review your information and contact you shortly. Expected response time: 1 business day.",
   fields: {
     name: { label: "Your name", placeholder: "Jane Smith" },
     business: { label: "Business name", placeholder: "Smith Landscaping" },
     email: { label: "Email", placeholder: "you@yourbusiness.com" },
     phone: { label: "Phone", placeholder: "(555) 123-4567" },
+    businessType: {
+      label: "Business type",
+      placeholder: "Landscaping, plumbing, HVAC…",
+    },
+    services: {
+      label: "Services interested in",
+      placeholder: "Website, SEO, Google Ads…",
+    },
+    timeline: {
+      label: "Estimated timeline",
+      placeholder: "Select a timeline",
+      options: [
+        "ASAP (within 1 week)",
+        "1–2 weeks",
+        "This month",
+        "1–3 months",
+        "Just exploring",
+      ],
+    },
     message: {
       label: "Tell us about your business",
       placeholder: "What services do you offer? Any specific goals?",
