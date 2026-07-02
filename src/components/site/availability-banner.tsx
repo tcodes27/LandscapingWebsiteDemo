@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { X, Sparkles } from "lucide-react";
+import { availabilityBanner } from "@/data/site";
 
 export function AvailabilityBanner() {
   const [open, setOpen] = useState(true);
@@ -10,8 +11,8 @@ export function AvailabilityBanner() {
         <div className="flex min-w-0 items-center gap-2 text-xs sm:text-sm">
           <Sparkles className="h-4 w-4 shrink-0 text-[var(--gold)]" />
           <p className="truncate">
-            <span className="font-semibold">Limited Availability:</span>{" "}
-            Only accepting 10 landscaping businesses during this promotional period.
+            <span className="font-semibold">{availabilityBanner.emphasis}</span>{" "}
+            {availabilityBanner.message}
           </p>
         </div>
         <button

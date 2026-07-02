@@ -1,17 +1,11 @@
 import { useEffect, useState } from "react";
-import { Menu, Leaf } from "lucide-react";
+import { Menu } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger, SheetTitle } from "@/components/ui/sheet";
 import { cn } from "@/lib/utils";
+import { brand, nav as LINKS, hero } from "@/data/site";
 
-const LINKS = [
-  { href: "#services", label: "Services" },
-  { href: "#results", label: "Results" },
-  { href: "#why", label: "Why" },
-  { href: "#pricing", label: "Pricing" },
-  { href: "#faq", label: "FAQ" },
-  { href: "#contact", label: "Contact" },
-];
+const LogoIcon = brand.logoIcon;
 
 export function SiteNav() {
   const [scrolled, setScrolled] = useState(false);
@@ -53,10 +47,10 @@ export function SiteNav() {
       <div className="mx-auto flex h-16 w-full max-w-6xl items-center justify-between gap-4 px-5 sm:px-8">
         <a href="#top" className="flex min-w-0 items-center gap-2">
           <span className="grid h-9 w-9 shrink-0 place-items-center rounded-xl bg-primary text-primary-foreground shadow-sm">
-            <Leaf className="h-4 w-4" />
+            <LogoIcon className="h-4 w-4" />
           </span>
           <span className="truncate font-display text-base font-bold tracking-tight">
-            Her Digital Media
+            {brand.name}
           </span>
         </a>
         <nav className="hidden items-center gap-1 md:flex">
@@ -77,7 +71,7 @@ export function SiteNav() {
         </nav>
         <div className="hidden md:block">
           <Button asChild size="sm" className="rounded-full">
-            <a href="#contact">Get My Website</a>
+            <a href={hero.ctaPrimary.href}>{hero.ctaPrimary.label}</a>
           </Button>
         </div>
         <Sheet open={open} onOpenChange={setOpen}>
@@ -100,7 +94,9 @@ export function SiteNav() {
                 </a>
               ))}
               <Button asChild className="mt-4 rounded-full">
-                <a href="#contact" onClick={() => setOpen(false)}>Get My Website</a>
+                <a href={hero.ctaPrimary.href} onClick={() => setOpen(false)}>
+                  {hero.ctaPrimary.label}
+                </a>
               </Button>
             </div>
           </SheetContent>

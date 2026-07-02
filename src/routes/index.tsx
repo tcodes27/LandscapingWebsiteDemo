@@ -11,7 +11,8 @@ import { Block4Proof } from "@/components/site/block-4-proof";
 import { Block5Online } from "@/components/site/block-5-online";
 import { Block6Offer } from "@/components/site/block-6-offer";
 import { Block7Growth } from "@/components/site/block-7-growth";
-import { Block8Close, FAQ_ITEMS } from "@/components/site/block-8-close";
+import { Block8Close } from "@/components/site/block-8-close";
+import { brand, industry, faq } from "@/data/site";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -25,11 +26,10 @@ export const Route = createFileRoute("/")({
         children: JSON.stringify({
           "@context": "https://schema.org",
           "@type": "LocalBusiness",
-          name: "Her Digital Media",
-          description:
-            "Professional websites for landscaping and lawn care businesses. Delivered in 2–3 days.",
-          email: "HerDigitalPath@gmail.com",
-          url: "https://herdigitalmedia.com",
+          name: brand.name,
+          description: industry.metaDescription,
+          email: brand.email,
+          url: brand.websiteUrl,
           areaServed: "United States",
           priceRange: "$$",
         }),
@@ -39,7 +39,7 @@ export const Route = createFileRoute("/")({
         children: JSON.stringify({
           "@context": "https://schema.org",
           "@type": "FAQPage",
-          mainEntity: FAQ_ITEMS.map((f) => ({
+          mainEntity: faq.items.map((f) => ({
             "@type": "Question",
             name: f.q,
             acceptedAnswer: { "@type": "Answer", text: f.a },
