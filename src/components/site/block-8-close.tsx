@@ -10,7 +10,6 @@ import { Section, Reveal } from "./section";
 import { brand, contact, faq, finalCta, footer } from "@/data/site";
 
 export const FAQ_ITEMS = faq.items;
-const LogoIcon = brand.logoIcon;
 
 export function Block8Close() {
   const [submitting, setSubmitting] = useState(false);
