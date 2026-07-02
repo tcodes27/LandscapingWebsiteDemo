@@ -74,19 +74,17 @@ export function Block5Online() {
           <div className="mb-5 text-xs font-semibold uppercase tracking-widest text-[var(--gold-soft)]">
             How a customer actually finds you
           </div>
-          <div className="grid gap-3 md:grid-cols-11 md:items-center">
+          <div className="flex flex-col gap-3 md:flex-row md:items-stretch">
             {FLOW.map((step, i) => (
-              <div key={step.label} className="contents">
-                <div className="flex items-center gap-3 rounded-2xl border border-white/10 bg-white/5 p-4 md:col-span-1 md:flex-col md:items-center md:text-center md:col-[span_1] md:!col-span-1 md:!p-4">
+              <div key={step.label} className="flex items-center gap-3 md:contents">
+                <div className="flex flex-1 items-center gap-3 rounded-2xl border border-white/10 bg-white/5 p-4 md:flex-col md:items-center md:text-center">
                   <span className="grid h-11 w-11 shrink-0 place-items-center rounded-xl bg-white/10 text-[var(--gold-soft)]">
                     <step.icon className="h-5 w-5" />
                   </span>
                   <div className="text-sm font-semibold">{step.label}</div>
                 </div>
                 {i < FLOW.length - 1 && (
-                  <div className="flex items-center justify-center py-1 md:col-span-1 md:py-0">
-                    <ArrowRight className="h-5 w-5 text-white/40 rotate-90 md:rotate-0" />
-                  </div>
+                  <ArrowRight className="h-5 w-5 shrink-0 rotate-90 text-white/40 md:rotate-0 md:self-center" />
                 )}
               </div>
             ))}
