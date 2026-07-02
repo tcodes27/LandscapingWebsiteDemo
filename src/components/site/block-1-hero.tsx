@@ -1,24 +1,15 @@
-import { ArrowRight, Search, Star, Zap, Smartphone, MapPin, Mail, Wrench, Compass } from "lucide-react";
+import { ArrowRight, Search, Star } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Reveal } from "./section";
 import { PhotoPlaceholder } from "./photo-placeholder";
+import { hero, industry } from "@/data/site";
 
-const SEARCHES = [
-  "Lawn Care Near Me",
-  "Landscaping Company",
-  "Mulch Installation",
-  "Tree Trimming",
-  "Yard Cleanup",
-];
-
-const TRUST = [
-  { icon: Smartphone, label: "Mobile Friendly" },
-  { icon: Search, label: "Google Search Ready" },
-  { icon: Zap, label: "Fast Loading" },
-  { icon: Mail, label: "Professional Email" },
-  { icon: Wrench, label: "Easy to Update" },
-  { icon: Compass, label: "Locally Focused" },
-];
+const chipTone = (t: "gold" | "primary" | "grass") =>
+  t === "gold"
+    ? "bg-[var(--gold)]/20 text-[var(--gold)]"
+    : t === "grass"
+      ? "bg-[var(--grass)]/20 text-[var(--forest)]"
+      : "bg-primary/10 text-primary";
 
 export function Block1Hero() {
   return (
@@ -37,12 +28,12 @@ export function Block1Hero() {
         <Reveal>
           <div className="inline-flex items-center gap-2 rounded-full border border-primary/15 bg-primary/5 px-3 py-1 text-xs font-semibold uppercase tracking-[0.14em] text-primary">
             <span className="h-1.5 w-1.5 rounded-full bg-[var(--gold)]" />
-            For local landscapers
+            {industry.eyebrow}
           </div>
           <h1 className="mt-5 text-[2.4rem] font-extrabold leading-[1.02] tracking-tight text-foreground sm:text-5xl md:text-6xl text-balance">
-            When customers search…{" "}
+            {hero.headline}{" "}
             <span className="relative inline-block text-primary">
-              make sure they find you.
+              {hero.headlineHighlight}
               <span
                 aria-hidden
                 className="absolute -bottom-1 left-0 h-2 w-full rounded-full bg-[var(--gold)]/40"
@@ -50,17 +41,16 @@ export function Block1Hero() {
             </span>
           </h1>
           <p className="mt-6 max-w-xl text-lg leading-relaxed text-muted-foreground sm:text-xl text-balance">
-            Your customers are searching online every day. If they can't find you, they're
-            hiring someone else. We build fast, professional landscaping websites in 2–3 days.
+            {hero.subhead}
           </p>
           <div className="mt-8 flex flex-wrap gap-3">
             <Button asChild size="lg" className="rounded-full text-base">
-              <a href="#contact">
-                Get My Website <ArrowRight className="ml-1 h-4 w-4" />
+              <a href={hero.ctaPrimary.href}>
+                {hero.ctaPrimary.label} <ArrowRight className="ml-1 h-4 w-4" />
               </a>
             </Button>
             <Button asChild size="lg" variant="outline" className="rounded-full text-base">
-              <a href="#results">See Live Results</a>
+              <a href={hero.ctaSecondary.href}>{hero.ctaSecondary.label}</a>
             </Button>
           </div>
           <div className="mt-8 flex items-center gap-4 text-sm text-muted-foreground">
@@ -77,9 +67,9 @@ export function Block1Hero() {
                 {Array.from({ length: 5 }).map((_, i) => (
                   <Star key={i} className="h-3.5 w-3.5 fill-current" />
                 ))}
-                <span className="ml-1 font-semibold text-foreground">Built for growth</span>
+                <span className="ml-1 font-semibold text-foreground">{hero.ratingLabel}</span>
               </div>
-              <p className="text-xs">Delivered in 2–3 business days · No contracts</p>
+              <p className="text-xs">{hero.deliveryNote}</p>
             </div>
           </div>
         </Reveal>
@@ -94,7 +84,7 @@ export function Block1Hero() {
                 <span className="h-2.5 w-2.5 rounded-full bg-yellow-400/60" />
                 <span className="h-2.5 w-2.5 rounded-full bg-green-400/60" />
                 <div className="ml-3 flex-1 rounded-md bg-muted px-2 py-0.5 text-[10px] text-muted-foreground">
-                  yourbusiness.com
+                  {hero.browserUrl}
                 </div>
               </div>
               <PhotoPlaceholder
@@ -117,33 +107,32 @@ export function Block1Hero() {
             </div>
 
             {/* Floating chips */}
-            <div className="absolute -right-4 top-8 hidden rounded-2xl border border-border bg-card p-3 shadow-lg sm:block">
-              <div className="flex items-center gap-2">
-                <div className="grid h-8 w-8 place-items-center rounded-full bg-[var(--gold)]/20 text-[var(--gold)]">
-                  <Star className="h-4 w-4 fill-current" />
+            {hero.floatingChips.map((chip, i) => {
+              const positions = [
+                "-right-4 top-8",
+                "-left-2 top-1/3",
+                "-bottom-8 right-4",
+              ];
+              const Icon = chip.icon;
+              return (
+                <div
+                  key={i}
+                  className={`absolute ${positions[i] ?? positions[0]} hidden rounded-2xl border border-border bg-card p-3 shadow-lg sm:block`}
+                >
+                  <div className="flex items-center gap-2">
+                    <div className={`grid h-8 w-8 place-items-center rounded-full ${chipTone(chip.tone)}`}>
+                      <Icon className={`h-4 w-4 ${chip.tone === "gold" ? "fill-current" : ""}`} />
+                    </div>
+                    <div>
+                      <div className="text-xs font-semibold">{chip.primary}</div>
+                      {chip.secondary && (
+                        <div className="text-[10px] text-muted-foreground">{chip.secondary}</div>
+                      )}
+                    </div>
+                  </div>
                 </div>
-                <div>
-                  <div className="text-xs font-semibold">4.9 Google Reviews</div>
-                  <div className="text-[10px] text-muted-foreground">Updated today</div>
-                </div>
-              </div>
-            </div>
-            <div className="absolute -left-2 top-1/3 hidden rounded-2xl border border-border bg-card p-3 shadow-lg sm:block">
-              <div className="flex items-center gap-2">
-                <div className="grid h-8 w-8 place-items-center rounded-full bg-primary/10 text-primary">
-                  <Zap className="h-4 w-4" />
-                </div>
-                <div className="text-xs font-semibold">Loads in 1.2s</div>
-              </div>
-            </div>
-            <div className="absolute -bottom-8 right-4 hidden rounded-2xl border border-border bg-card p-3 shadow-lg sm:block">
-              <div className="flex items-center gap-2">
-                <div className="grid h-8 w-8 place-items-center rounded-full bg-[var(--grass)]/20 text-[var(--forest)]">
-                  <MapPin className="h-4 w-4" />
-                </div>
-                <div className="text-xs font-semibold">Local SEO ready</div>
-              </div>
-            </div>
+              );
+            })}
           </div>
         </Reveal>
       </div>
@@ -156,10 +145,10 @@ export function Block1Hero() {
               <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[var(--grass)] opacity-60" />
               <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-[var(--grass)]" />
             </span>
-            Right now people are searching:
+            {hero.urgencyLead}
           </div>
           <div className="flex flex-wrap gap-2">
-            {SEARCHES.map((s) => (
+            {hero.searches.map((s) => (
               <span
                 key={s}
                 className="inline-flex items-center gap-1.5 rounded-full border border-border bg-card px-3 py-1 text-xs font-medium text-muted-foreground"
@@ -169,15 +158,13 @@ export function Block1Hero() {
               </span>
             ))}
           </div>
-          <p className="text-xs text-muted-foreground sm:ml-auto">
-            If your business isn't online, they're hiring someone else.
-          </p>
+          <p className="text-xs text-muted-foreground sm:ml-auto">{hero.urgencyTail}</p>
         </div>
       </div>
 
       {/* Trust bar */}
       <div className="mx-auto grid w-full max-w-6xl grid-cols-2 gap-4 px-5 py-10 sm:grid-cols-3 sm:px-8 md:grid-cols-6">
-        {TRUST.map(({ icon: Icon, label }) => (
+        {hero.trustBar.map(({ icon: Icon, label }) => (
           <div key={label} className="flex items-center gap-2.5 text-sm text-muted-foreground">
             <span className="grid h-9 w-9 shrink-0 place-items-center rounded-xl bg-primary/8 text-primary">
               <Icon className="h-4 w-4" />

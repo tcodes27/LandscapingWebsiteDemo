@@ -1,66 +1,9 @@
 import { useState } from "react";
-import { Scissors, Palette, Sprout, TreeDeciduous, Leaf, Lightbulb, ArrowRight } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 import { Section, Reveal } from "./section";
 import { PhotoPlaceholder } from "./photo-placeholder";
-
-type Service = {
-  icon: React.ComponentType<{ className?: string }>;
-  title: string;
-  blurb: string;
-  detail: string;
-};
-
-const SERVICES: Service[] = [
-  {
-    icon: Scissors,
-    title: "Lawn Maintenance",
-    blurb: "Weekly mowing, edging, and trimming that keeps yards looking sharp.",
-    detail: "Show a clear service schedule, before-and-after photos, and easy quote requests.",
-  },
-  {
-    icon: Palette,
-    title: "Landscape Design",
-    blurb: "Custom outdoor spaces designed around each customer's home.",
-    detail: "Highlight portfolio work, design consultations, and project timelines.",
-  },
-  {
-    icon: Sprout,
-    title: "Mulch Installation",
-    blurb: "Fresh mulch that protects plants and lifts curb appeal fast.",
-    detail: "Include square-footage pricing, color options, and seasonal packages.",
-  },
-  {
-    icon: TreeDeciduous,
-    title: "Tree Trimming",
-    blurb: "Safe, professional pruning and removal for healthier trees.",
-    detail: "Feature licensing, insurance, and safety credentials right on the page.",
-  },
-  {
-    icon: Leaf,
-    title: "Seasonal Cleanup",
-    blurb: "Spring and fall cleanups that get properties ready in one visit.",
-    detail: "Offer scheduled slots, add-on services, and easy online booking.",
-  },
-  {
-    icon: Lightbulb,
-    title: "Outdoor Lighting",
-    blurb: "Landscape and pathway lighting that shows off finished work.",
-    detail: "Show installation photos, product tiers, and warranty details.",
-  },
-];
-
-const INDUSTRIES = [
-  "Lawn Care",
-  "Landscaping",
-  "Tree Services",
-  "Mulch Installation",
-  "Hardscaping",
-  "Irrigation",
-  "Outdoor Lighting",
-  "Pressure Washing",
-  "Junk Removal",
-];
+import { services, perfectFor, type Service } from "@/data/site";
 
 export function Block2Services() {
   const [active, setActive] = useState<Service | null>(null);
@@ -73,7 +16,7 @@ export function Block2Services() {
       tone="muted"
     >
       <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-        {SERVICES.map((s, i) => (
+        {services.map((s, i) => (
           <Reveal key={s.title} delay={i * 40}>
             <button
               onClick={() => setActive(s)}
@@ -106,11 +49,11 @@ export function Block2Services() {
               Perfect for
             </div>
             <p className="mt-2 max-w-xs text-lg font-semibold tracking-tight">
-              Local service businesses that live and die by their phone.
+              {perfectFor.copy}
             </p>
           </div>
           <div className="flex flex-wrap gap-2">
-            {INDUSTRIES.map((label) => (
+            {perfectFor.industries.map((label) => (
               <span
                 key={label}
                 className="rounded-full border border-border bg-muted/50 px-3.5 py-1.5 text-sm font-medium"
