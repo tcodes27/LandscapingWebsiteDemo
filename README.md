@@ -383,8 +383,7 @@ I care as much about the user's outcome as the code that gets them there.
 
 ## Contact
 
-- **Portfolio** — <!-- TODO: portfolio URL -->
-- **GitHub** — <!-- TODO: GitHub profile URL -->
+- **🌐 Live Demo** — https://landscapingwebsitedemo.tierrabcodes.workers.dev
 - **LinkedIn** — <!-- TODO: LinkedIn URL -->
 - **Email** — [tb23la@gmail.com](mailto:tb23la@gmail.com)
 
