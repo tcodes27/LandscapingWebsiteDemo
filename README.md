@@ -386,7 +386,7 @@ I care as much about the user's outcome as the code that gets them there.
 - **Portfolio** — <!-- TODO: portfolio URL -->
 - **GitHub** — <!-- TODO: GitHub profile URL -->
 - **LinkedIn** — <!-- TODO: LinkedIn URL -->
-- **Email** — [HerDigitalPath@gmail.com](mailto:HerDigitalPath@gmail.com)
+- **Email** — [tb23la@gmail.com](mailto:tb23la@gmail.com)
 
 ---
 
