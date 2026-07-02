@@ -53,7 +53,7 @@ import {
   Sprout,
   Star,
   Target,
-  Trees as TreeDeciduous,
+  TreeDeciduous,
   TrendingUp,
   User,
   UserCog,
