@@ -5,8 +5,6 @@ import { Sheet, SheetContent, SheetTrigger, SheetTitle } from "@/components/ui/s
 import { cn } from "@/lib/utils";
 import { brand, nav as LINKS, hero } from "@/data/site";
 
-const LogoIcon = brand.logoIcon;
-
 export function SiteNav() {
   const [scrolled, setScrolled] = useState(false);
   const [active, setActive] = useState("");
