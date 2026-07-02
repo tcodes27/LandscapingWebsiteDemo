@@ -139,6 +139,23 @@ export function Block8Close() {
               </h2>
               <p className="mt-2 text-sm text-muted-foreground">{contact.copy}</p>
             </div>
+            {submitted ? (
+              <div className="rounded-2xl border border-primary/20 bg-primary/5 p-8 text-center">
+                <div className="mx-auto grid h-12 w-12 place-items-center rounded-full bg-primary/10 text-primary text-2xl">
+                  ✅
+                </div>
+                <h3 className="mt-4 font-display text-xl font-bold">{contact.successTitle}</h3>
+                <p className="mt-2 text-sm text-muted-foreground">{contact.successBody}</p>
+                <Button
+                  type="button"
+                  variant="outline"
+                  className="mt-6 rounded-full"
+                  onClick={() => setSubmitted(false)}
+                >
+                  Submit another inquiry
+                </Button>
+              </div>
+            ) : (
             <form onSubmit={onSubmit} className="grid gap-4 sm:grid-cols-2">
               <div className="grid gap-1.5">
                 <Label htmlFor="name">{contact.fields.name.label}</Label>
@@ -156,6 +173,43 @@ export function Block8Close() {
                 <Label htmlFor="phone">{contact.fields.phone.label}</Label>
                 <Input id="phone" name="phone" type="tel" required placeholder={contact.fields.phone.placeholder} />
               </div>
+              <div className="grid gap-1.5">
+                <Label htmlFor="businessType">{contact.fields.businessType.label}</Label>
+                <Input
+                  id="businessType"
+                  name="businessType"
+                  required
+                  placeholder={contact.fields.businessType.placeholder}
+                />
+              </div>
+              <div className="grid gap-1.5">
+                <Label htmlFor="services">{contact.fields.services.label}</Label>
+                <Input
+                  id="services"
+                  name="services"
+                  required
+                  placeholder={contact.fields.services.placeholder}
+                />
+              </div>
+              <div className="grid gap-1.5 sm:col-span-2">
+                <Label htmlFor="timeline">{contact.fields.timeline.label}</Label>
+                <select
+                  id="timeline"
+                  name="timeline"
+                  required
+                  defaultValue=""
+                  className="flex h-9 w-full rounded-md border border-input bg-transparent px-3 py-1 text-base shadow-sm transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring md:text-sm"
+                >
+                  <option value="" disabled>
+                    {contact.fields.timeline.placeholder}
+                  </option>
+                  {contact.fields.timeline.options.map((opt) => (
+                    <option key={opt} value={opt}>
+                      {opt}
+                    </option>
+                  ))}
+                </select>
+              </div>
               <div className="grid gap-1.5 sm:col-span-2">
                 <Label htmlFor="message">{contact.fields.message.label}</Label>
                 <Textarea
@@ -171,6 +225,7 @@ export function Block8Close() {
                 </Button>
               </div>
             </form>
+            )}
 
             <div className="mt-8 grid grid-cols-2 gap-3 border-t border-border pt-6 sm:grid-cols-3">
               {contact.trustBadges.map((t) => (
@@ -179,6 +234,44 @@ export function Block8Close() {
                     <t.icon className="h-3 w-3" />
                   </span>
                   <span className="min-w-0 truncate font-medium text-foreground">{t.label}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* How This Works — free Google workflow */}
+          <div className="mt-8 rounded-3xl border border-border bg-muted/30 p-6 sm:p-8">
+            <div className="text-center">
+              <div className="text-xs font-semibold uppercase tracking-widest text-primary">
+                Behind the scenes
+              </div>
+              <h3 className="mt-2 font-display text-xl font-bold tracking-tight sm:text-2xl">
+                How This Works
+              </h3>
+              <p className="mx-auto mt-2 max-w-2xl text-sm text-muted-foreground">
+                Powered entirely by free Google tools — no monthly software subscriptions. The
+                same setup we can build into your business.
+              </p>
+            </div>
+            <div className="mt-6 flex flex-wrap items-center justify-center gap-2 sm:gap-3">
+              {[
+                { icon: User, label: "Visitor" },
+                { icon: Globe, label: "Website" },
+                { icon: MousePointerClick, label: "Google Form Endpoint" },
+                { icon: FileSpreadsheet, label: "Google Sheet" },
+                { icon: Bell, label: "Email Notification" },
+                { icon: Inbox, label: "You" },
+              ].map((step, i, arr) => (
+                <div key={step.label} className="flex items-center gap-2 sm:gap-3">
+                  <div className="flex items-center gap-2 rounded-full border border-border bg-card px-3 py-2 text-xs font-medium sm:text-sm">
+                    <span className="grid h-6 w-6 place-items-center rounded-full bg-primary/10 text-primary">
+                      <step.icon className="h-3.5 w-3.5" />
+                    </span>
+                    {step.label}
+                  </div>
+                  {i < arr.length - 1 && (
+                    <ArrowRight className="h-3.5 w-3.5 text-muted-foreground" />
+                  )}
                 </div>
               ))}
             </div>
@@ -206,7 +299,10 @@ export function Block8Close() {
             </div>
             <ul className="mt-3 space-y-2 text-sm">
               <li>
-                <a href={`mailto:${brand.email}`} className="inline-flex items-center gap-2 hover:text-primary">
+                <a
+                  href={`mailto:${brand.email}`}
+                  className="inline-flex items-center gap-2 hover:text-primary"
+                >
                   <Mail className="h-3.5 w-3.5" /> {brand.email}
                 </a>
               </li>
