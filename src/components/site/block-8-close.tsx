@@ -170,8 +170,8 @@ export function Block8Close() {
         <div className="mx-auto grid w-full max-w-6xl gap-10 px-5 py-14 sm:px-8 md:grid-cols-[1.4fr_1fr_1fr]">
           <div>
             <div className="flex items-center gap-2">
-              <span className="grid h-9 w-9 place-items-center rounded-xl bg-primary text-primary-foreground">
-                <LogoIcon className="h-4 w-4" />
+              <span className="grid h-11 w-11 place-items-center overflow-hidden rounded-xl bg-white ring-1 ring-border">
+                <img src={brand.logoImage} alt={`${brand.name} logo`} className="h-10 w-10 object-contain" />
               </span>
               <span className="font-display text-lg font-bold tracking-tight">
                 {brand.name}
