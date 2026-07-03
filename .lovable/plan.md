@@ -1,83 +1,50 @@
-# Plan: Premium Case-Study README v2
+## Plan: Extend README with Google Workspace Backend Case Study
 
-Build a polished `README.md` at the repo root that reads like an engineering case study — for hiring managers, recruiters, engineers, PMs, and prospective clients. No app/code changes; README + screenshot assets only.
+Append a new engineering case-study section to `README.md` and add screenshots to `docs/screenshots/`. Existing README content stays intact. No app source code changes.
 
-## Deliverables
+### New screenshots (copied from uploads)
+- `docs/screenshots/google-sheet-crm.png` — Lead CRM sheet with rows
+- `docs/screenshots/crm-dashboard.png` — CRM dashboard with pie chart
+- `docs/screenshots/apps-script-backend.png` — Apps Script `doPost` code
+- `docs/screenshots/gmail-notification.png` — Full inquiry email
+- `docs/screenshots/gmail-inbox.png` — Inbox list of inquiries
 
-1. **`README.md`** (root) — the full case-study document.
-2. **`docs/screenshots/`** — screenshots committed to the repo so GitHub renders them via relative paths:
-   - `docs/screenshots/hero.png` (from uploaded hero shot)
-   - `docs/screenshots/results-dashboard.png` (from uploaded dashboard shot)
+### README additions
 
-## README structure (in order)
+Insert `## Google Workspace Backend — Engineering Case Study` between the existing `Business Impact` and `Reusable Architecture` sections, and add a matching Table of Contents entry.
 
-1. **Hero**
-   - Title: **Local Business Growth Platform**
-   - Subtitle: *Case Study: Premium Lead Generation Website & Google Workspace CRM*
-   - One-sentence pitch: reusable platform for local service businesses.
-   - Shields.io badges: Status (Live), React 19, TanStack Start, TypeScript, Tailwind v4, Vite 7, Framer Motion, Google Apps Script, License.
-   - CTA badge row: Live Demo · Source Code · Portfolio · Contact.
+Subsections in order:
 
-2. **Key Outcomes** (4 metric cards, 2×2 markdown table)
-   - Production-ready architecture
-   - Reusable multi-industry foundation
-   - Zero monthly software cost backend
-   - Google Workspace integration
+1. **Architecture Overview** — opens with the user's framing:
+   > This project intentionally uses a lightweight, serverless backend powered by Google Workspace. Instead of introducing a traditional database and API server, the solution leverages Google Apps Script, Google Sheets, and Gmail to provide a reliable lead management workflow with minimal infrastructure and no recurring backend costs. This approach is ideal for small businesses while remaining extensible for future growth.
 
-3. **Table of Contents** — clickable anchors.
+   Followed by bullets: zero monthly cost, client ownership, easy onboarding, easy maintenance, no DB admin, no vendor lock-in, scalable.
 
-4. **Project Goals** — bulleted intent statement (reusable platform, scalable FE architecture, modern React/TS, replace SaaS with Google free tools, a11y/SEO/perf).
+2. **Backend Workflow** — Mermaid `flowchart LR` (Visitor → Landing Page → Contact Form → Google Apps Script → Google Sheets CRM → Gmail Notification → Business Owner → Follow-up) + one-sentence purpose per step.
 
-5. **Project Overview** — problem, audience, business value, user value. Short paragraphs.
+3. **Google Apps Script** — embed `apps-script-backend.png`. Purpose paragraph + Responsibilities bullets (receives submissions, validates data, writes to Sheets, sends Gmail, returns success) + rationale vs traditional backend.
 
-6. **My Role** — bulleted list of contributions: product strategy, UX planning, IA, UI direction, frontend engineering, component architecture, backend integration planning, Google Workspace workflow, SEO strategy, accessibility planning.
+4. **Google Lead CRM** — embed `google-sheet-crm.png` and `crm-dashboard.png`. Feature bullets (auto capture, timestamp, business info, contact info, services, timeline, lead status, notes, follow-up workflow) + note that the CRM can be duplicated per client.
 
-7. **Screenshots (Mini Case Studies)** — one block per screenshot with sub-headings: **Purpose · Challenge · Solution · Business Value · Engineering Highlights**. Two entries (hero, results dashboard) using relative image paths.
+5. **Gmail Notification System** — embed `gmail-inbox.png` and `gmail-notification.png`. Bullets (instant notifications, mobile friendly, industry-specific subjects, quick response) + note on Gmail filters/labels for auto-organization.
 
-8. **Feature Highlights** — grouped table: Responsive Design, Interactive UI, Lead Capture, Google Sheets Integration, Apps Script Backend, Gmail Notifications, SEO, Local Business Focus, Reusable Architecture, Accessibility, Performance, Mobile First, Smooth Animations. Columns: Feature · What · Why · User Benefit.
+6. **Why Google Workspace?** — comparison table with rows Hosting cost, Monthly cost, Maintenance, Client ownership, Ease of use, Learning curve, Deployment speed, Best use case; columns Google Workspace vs Traditional Backend.
 
-9. **Architecture — Business Workflow** — Mermaid `flowchart` embedded in the markdown showing: Visitor → Landing Page → Lead Capture → Google Apps Script → Google Lead CRM (Sheets) → Email Notification → Business Owner → Follow-up → Customer. Short "why this step exists" note under each stage.
+7. **Engineering Decisions — Why This Architecture?** — bullets: lightweight backend, serverless, configuration-driven, separation of frontend/backend, reusable code, easily duplicated per client, future migration path to Supabase or custom backend.
 
-10. **Business Impact** — side-by-side table: *Without this system* vs *With this system* (lost inquiries vs organized leads, manual tracking vs instant notifications, etc.).
+8. **Scalability** — ```text``` block showing Website → Google Workspace → Multiple Clients → CRM → Calendar → Automation → Client Portal → Custom Software, with short explanation of the evolution path.
 
-11. **Reusable Architecture** — industry-readiness table (Landscaping, HVAC, Plumbing, Roofing, Cleaning, Electricians, Construction, Med Spa, Salon, Dental — all ✓) with a note that content is driven by `src/data/site.ts` reusable data structures.
+9. **Business Value** — bullets: owns website, owns data, no monthly subscriptions, low operating cost, easy maintenance, fast deployment, easy future upgrades.
 
-12. **Why Google Workspace?** — explains intentional choice of Sheets + Apps Script + Gmail over Supabase/Firebase/paid CRM. Bullets: zero monthly cost, client ownership, easy onboarding, easy maintenance, scales for small businesses.
+10. **Technical Skills Demonstrated** — 3-column markdown table listing all 17 skills (React, TypeScript, TanStack Start, Tailwind CSS, Responsive Design, Accessibility, Google Apps Script, Google Sheets, Google Workspace, Serverless Architecture, REST-style Integration, Lead Automation, CRM Design, SEO, Component Architecture, State Management, Configuration-driven Development).
 
-13. **Design & Engineering Decisions** — collapsible `<details>` blocks: Sheets over DB, reusable components, industry-agnostic data layer, ownership vs subscriptions, performance & a11y, scalability path.
+11. **Portfolio Positioning** — short paragraph + bullets (full-stack thinking, product design, business automation, cloud integration, serverless architecture, workflow automation, reusable software architecture) framing the project as a complete production-ready business solution, not just a marketing site.
 
-14. **Developer Highlights** — engineering decisions bullets: component-driven architecture, separation of content and presentation, config-driven setup, modular sections, mobile-first, accessible UI, SEO-first, perf optimization, production-ready organization.
+### Style rules
+- Match existing README voice: short paragraphs, 6–8th grade reading level, outcome-focused.
+- Reuse existing formatting patterns (tables, `> Why it matters` callouts, Mermaid fenced blocks).
+- No emojis in Mermaid. Relative image paths (`docs/screenshots/...`).
 
-15. **Technology Stack** — categorized table: Frontend, Backend, Hosting, Automation, Design, Dev Tools, Testing, Icons, Fonts, Analytics.
-
-16. **Folder Structure** — trimmed `src/` tree with one-line descriptions per major folder (`routes/`, `components/site/`, `components/ui/`, `data/`, `lib/`, `config/`, `assets/`).
-
-17. **Performance & Quality** — checklist bullets (fast loading, responsive, semantic HTML, SEO-ready, a11y, production-ready, reusable components, maintainable).
-
-18. **Future Roadmap** — table of planned items (Client Dashboard, Google Calendar, CRM enhancements, appointment scheduling, analytics, AI assistant, automation).
-
-19. **What I Would Build Next** — forward-thinking list: authentication, customer portal, dashboard, appointment scheduling, analytics, payment integration, AI assistant, CRM enhancements.
-
-20. **Lessons Learned** — short prose on tricky decisions and growth.
-
-21. **About the Developer** — professional intro with strengths: frontend engineering, UI/UX, accessibility, business automation, cloud integrations, scalable systems, problem solving.
-
-22. **Contact** — Portfolio, GitHub, LinkedIn, Email (uses `HerDigitalPath@gmail.com` from `src/data/site.ts`; other links as clearly-marked `<!-- TODO -->` placeholders).
-
-23. **Final Thoughts** (closing, replaces ending on Contact)
-    > This project demonstrates how modern frontend engineering, thoughtful UX, and simple backend automation can deliver enterprise-quality experiences for small businesses without introducing unnecessary complexity or recurring software costs. It reflects my approach to building software that is scalable, maintainable, accessible, and focused on solving real business problems.
-
-## Design/formatting rules
-
-- Shields.io badges via `img.shields.io`.
-- GitHub-flavored markdown only; Mermaid in a ```` ```mermaid ```` block.
-- `<details><summary>` collapsibles for long sections (engineering decisions, roadmap).
-- Tables for stack, features, roadmap, industries, business impact.
-- Callouts via `> **Note**` / `> **Why it matters**` blockquotes.
-- Emoji used sparingly as section markers only.
-- Short paragraphs, 6th–8th grade reading level.
-- Screenshots via relative paths so they render on GitHub and locally.
-
-## Placeholders I will flag inline
-
-Portfolio URL, GitHub profile URL, LinkedIn URL, and Live Demo URL are not in the codebase — inserted as clearly-labeled `<!-- TODO -->` placeholders next to each. Email pulled from `src/data/site.ts`.
+### Files touched
+- `README.md`
+- `docs/screenshots/{google-sheet-crm,crm-dashboard,apps-script-backend,gmail-notification,gmail-inbox}.png`

@@ -38,6 +38,7 @@ A reusable, production-ready website platform that helps local service businesse
 - [Feature Highlights](#feature-highlights)
 - [Architecture — Business Workflow](#architecture--business-workflow)
 - [Business Impact](#business-impact)
+- [Google Workspace Backend — Engineering Case Study](#google-workspace-backend--engineering-case-study)
 - [Reusable Architecture](#reusable-architecture)
 - [Why Google Workspace?](#why-google-workspace)
 - [Design & Engineering Decisions](#design--engineering-decisions)
@@ -174,6 +175,165 @@ flowchart TD
 | Slow response time; leads go cold | Instant Gmail notification the moment a lead submits |
 | No way to measure what is working | Timeline and service fields reveal customer intent |
 | Recurring SaaS bills eat margin | Zero monthly software cost |
+
+---
+
+## Google Workspace Backend — Engineering Case Study
+
+### Architecture Overview
+
+This project intentionally uses a lightweight, serverless backend powered by Google Workspace. Instead of introducing a traditional database and API server, the solution leverages Google Apps Script, Google Sheets, and Gmail to provide a reliable lead management workflow with minimal infrastructure and no recurring backend costs. This approach is ideal for small businesses while remaining extensible for future growth.
+
+- **Zero monthly cost** — no database, no server, no SaaS bill.
+- **Full client ownership** — the Sheet and Script live in the owner's Google Drive.
+- **Easy onboarding** — owners already know how to use Sheets and Gmail.
+- **Easy maintenance** — one script file, no migrations, no cold starts.
+- **No database administration** — schema evolves by adding a column.
+- **No vendor lock-in** — data exports to CSV in one click.
+- **Scalable** — Sheets handles thousands of rows before we ever need to migrate.
+
+### Backend Workflow
+
+```mermaid
+flowchart LR
+    A[Visitor] --> B[Landing Page]
+    B --> C[Contact Form]
+    C --> D[Google Apps Script]
+    D --> E[Google Sheets CRM]
+    D --> F[Gmail Notification]
+    F --> G[Business Owner]
+    G --> H[Follow-up]
+```
+
+- **Landing Page** — captures attention and drives the visitor to the form.
+- **Contact Form** — validates input and posts JSON to Apps Script.
+- **Apps Script** — the serverless endpoint that receives, stores, and notifies.
+- **Sheets CRM** — durable, human-readable record of every lead.
+- **Gmail Notification** — instant alert so the owner can respond while intent is hot.
+- **Follow-up** — owner updates lead status directly in the sheet.
+
+### Google Apps Script — The Serverless Endpoint
+
+![Apps Script doPost handler](docs/screenshots/apps-script-backend.png)
+
+A single Apps Script file replaces an entire backend service. It runs on Google's infrastructure, scales automatically, and costs nothing.
+
+**Responsibilities**
+- Receives POST submissions from the website contact form.
+- Parses and validates the incoming JSON payload.
+- Appends a new row to the Sheets CRM with a timestamp.
+- Sends a formatted Gmail notification to the business owner.
+- Returns a success response to the frontend.
+
+> **Why not a traditional backend?** A dedicated API server, database, and auth layer would add monthly cost and operational burden for a workflow that fits in 40 lines of JavaScript. Apps Script keeps the surface area small and the ownership with the client.
+
+### Google Lead CRM
+
+![Lead CRM sheet with structured columns](docs/screenshots/google-sheet-crm.png)
+
+![CRM dashboard with lead status breakdown](docs/screenshots/crm-dashboard.png)
+
+The Sheet is more than storage — it is a working CRM the owner already knows how to use.
+
+- **Automatic capture** of every form submission.
+- **Timestamp** on every row for response-time tracking.
+- **Business info** — name, business name, business type.
+- **Contact info** — email and phone.
+- **Services** the lead is interested in.
+- **Timeline** — how soon the lead needs the work.
+- **Lead status** — New, Contacted, Proposal Sent, Won, Lost.
+- **Notes** column for follow-up context.
+- **Dashboard tab** — live counts and a pie chart of pipeline status.
+
+> The entire CRM is a single file. To onboard a new client I duplicate the sheet, update one Script constant, and they are live.
+
+### Gmail Notification System
+
+![Gmail inbox showing multiple lead notifications](docs/screenshots/gmail-inbox.png)
+
+![Formatted lead notification email](docs/screenshots/gmail-notification.png)
+
+- **Instant notifications** the moment a lead submits.
+- **Mobile friendly** — Gmail app pushes the alert straight to the owner's phone.
+- **Industry-specific subject lines** so leads never blend into the inbox.
+- **Quick response** — reply, forward, and archive from any device.
+
+> Gmail filters and labels can auto-organize inquiries by service type or timeline, giving the owner a zero-cost inbox pipeline.
+
+### Why Google Workspace vs a Traditional Backend?
+
+| Criteria | Google Workspace | Traditional Backend |
+|---|---|---|
+| Hosting cost | $0 | $10–$50+/mo |
+| Monthly cost | $0 | Ongoing SaaS + infra |
+| Maintenance | Almost none | Patches, migrations, uptime |
+| Client ownership | Full — lives in their Drive | Locked to developer or vendor |
+| Ease of use | Familiar to any owner | Requires an admin UI |
+| Learning curve | Near zero | Training required |
+| Deployment speed | Minutes | Days |
+| Best use case | Small local businesses | High-volume, multi-tenant SaaS |
+
+### Engineering Decisions — Why This Architecture?
+
+- **Lightweight backend** — the minimum surface area that solves the problem.
+- **Serverless** — no host to patch, no container to babysit.
+- **Configuration-driven** — endpoint URL and copy live in typed config files.
+- **Clean separation** of frontend (TanStack Start) and backend (Apps Script) via a single JSON contract.
+- **Reusable code** — the same frontend ships to any service business.
+- **Easily duplicated per client** — duplicate the sheet, swap one constant, done.
+- **Clear migration path** — when a client outgrows Sheets, the schema lifts straight into Supabase or a custom API.
+
+### Scalability Path
+
+```text
+Website
+   ↓
+Google Workspace (Sheets + Apps Script + Gmail)
+   ↓
+Multiple Clients (duplicated sheets)
+   ↓
+CRM  →  Calendar  →  Automation
+   ↓
+Client Portal
+   ↓
+Custom Software (Supabase / dedicated API)
+```
+
+The stack starts free and grows with the business. Nothing has to be thrown away when it is time to level up — the JSON contract and data model come with you.
+
+### Business Value
+
+- The client **owns their website**.
+- The client **owns their data**.
+- **No monthly software subscriptions**.
+- **Low operating cost**, indefinitely.
+- **Easy maintenance** for a non-technical owner.
+- **Fast deployment** — new clients live in a day.
+- **Easy future upgrades** when the business is ready.
+
+### Technical Skills Demonstrated
+
+| Frontend | Backend & Automation | Product & Systems |
+|---|---|---|
+| React | Google Apps Script | Serverless Architecture |
+| TypeScript | Google Sheets | Lead Automation |
+| TanStack Start | Google Workspace | CRM Design |
+| Tailwind CSS | REST-style Integration | Component Architecture |
+| Responsive Design | Workflow Automation | State Management |
+| Accessibility | Gmail Integration | Configuration-driven Development |
+| SEO |  |  |
+
+### Portfolio Positioning
+
+This is a **complete production-ready business solution**, not just a marketing website. It demonstrates:
+
+- **Full-stack thinking** — frontend, backend, and workflow together.
+- **Product design** — solving a real owner's problem end-to-end.
+- **Business automation** — capture, notify, track, follow up.
+- **Cloud integration** — Google Workspace as the runtime.
+- **Serverless architecture** — no infrastructure to run.
+- **Workflow automation** — the sheet is the CRM is the source of truth.
+- **Reusable software architecture** — one codebase, many industries.
 
 ---
 
